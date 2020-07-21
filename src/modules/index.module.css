@@ -1,0 +1,32 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css";
+
+.header {
+    display: flex;
+    margin: 50px auto;
+}
+
+.intro {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    width: 33.33%;
+}
+
+@media only screen and (max-width: mobile) {
+    .card-list {
+        display: block;
+    }
+
+    .card {
+        width: 100%;
+    }
+}

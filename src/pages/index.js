@@ -4,26 +4,30 @@ import Animated from '../components/animated'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
+import classes from '../modules/index.module.css'
 import rocket from '../assets/rocket-light.json'
+import { highlights, projects, interests } from '../constant'
 
 const placeholder = `https://images.unsplash.com/photo-1489549132488-d00b7eee80f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80`
 
-const CardList = ({ title, children }) => {
+const CardList = ({ title, content }) => {
   return (
     <div style={{ margin: `100px auto` }}>
       <h2 id={title} style={{ textAlign: `center` }}>{title}</h2>
-      <div style={{ display: `flex`, justifyContent: `space-between` }}>
-        {children}
+      <div className={classes.cardList}>
+        {content.map((props, i) => (
+          <Card key={i} {...props} />
+        ))}
       </div>
     </div>
   )
 }
 
-const Card = ({ src, title, content, tags = [] }) => {
+const Card = ({ src, title, content, tags = [], ...props }) => {
   return (
-    <div>
+    <div className={classes.card} {...props}>
       <img
-        src={src}
+        src={src || placeholder}
         style={{
           borderRadius: `50%`,
           width: 250,
@@ -34,16 +38,17 @@ const Card = ({ src, title, content, tags = [] }) => {
         }}
       />
       <h4 style={{ textAlign: `center` }}>{title}</h4>
-      <div style={{ display: `flex`, justifyContent: `center` }}>
+      <div style={{ textAlign: `center`, marginBottom: `1rem` }}>
         {tags.map(tag =>
           <span
             key={tag}
             style={{
               border: `1px solid #ededed`,
               borderRadius: 20,
-              padding: `2px 10px`,
+              padding: `5px 10px`,
               margin: 5,
               fontSize: `small`,
+              whiteSpace: `nowrap`,
             }}
           >
             {tag}
@@ -59,67 +64,17 @@ const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
 
-    <div style={{ display: `flex`, margin: `50px auto` }}>
+    <div className={classes.header}>
       <Animated animationData={rocket} style={{ flex: 1.5 }} />
-      <div style={{ display: `flex`, flexDirection: `column`, justifyContent: `center`, flex: 1 }}>
+      <div className={classes.intro}>
         <h1>Hi there!</h1>
-        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis sapien vitae nibh lacinia pellentesque. Suspendisse accumsan ex nec lorem rutrum congue.</div>
+        <div>My name is Alice Kim. I am a 4th year student at UBC studying Computer Science. I am actively looking for internships or new grad opportunities!</div>
       </div>
     </div>
 
-    <CardList title={`Highlights`}>
-      <Card
-        src={placeholder}
-        title={`Lorem ipsum`}
-        content={`Proin lobortis sapien vitae nibh lacinia pellentesque. Suspendisse accumsan ex nec lorem rutrum congue.`}
-      />
-      <Card
-        src={placeholder}
-        title={`Lorem ipsum`}
-        content={`Proin lobortis sapien vitae nibh lacinia pellentesque. Suspendisse accumsan ex nec lorem rutrum congue.`}
-      />
-      <Card
-        src={placeholder}
-        title={`Lorem ipsum`}
-        content={`Proin lobortis sapien vitae nibh lacinia pellentesque. Suspendisse accumsan ex nec lorem rutrum congue.`}
-      />
-    </CardList>
-
-    <CardList title={`Projects`}>
-      <Card
-        src={placeholder}
-        title={`Lorem ipsum`}
-        content={`Proin lobortis sapien vitae nibh lacinia pellentesque. Suspendisse accumsan ex nec lorem rutrum congue.`}
-        tags={[`React`, `AWS`]}
-      />
-      <Card
-        src={placeholder}
-        title={`Lorem ipsum`}
-        content={`Proin lobortis sapien vitae nibh lacinia pellentesque. Suspendisse accumsan ex nec lorem rutrum congue.`}
-        tags={[`React Native`, `Google Firebase`]}
-      />
-      <Card
-        src={placeholder}
-        title={`Lorem ipsum`}
-        content={`Proin lobortis sapien vitae nibh lacinia pellentesque. Suspendisse accumsan ex nec lorem rutrum congue.`}
-        tags={[`Vue`]}
-      />
-    </CardList>
-
-    <CardList title={`Interest`}>
-      <Card
-        src={placeholder}
-        title={`Lorem ipsum`}
-      />
-      <Card
-        src={placeholder}
-        title={`Lorem ipsum`}
-      />
-      <Card
-        src={placeholder}
-        title={`Lorem ipsum`}
-      />
-    </CardList>
+    <CardList title={`Highlights`} content={highlights} />
+    <CardList title={`Projects`} content={projects} />
+    <CardList title={`Interests`} content={interests} />
   </Layout >
 )
 
