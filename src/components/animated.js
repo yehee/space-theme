@@ -23,8 +23,8 @@ const Animated = ({ animationData, canPause, canStop, canPlay, ...props }) => {
         <div {...props}>
             <Lottie
                 options={defaultOptions}
-                height={375}
-                width={375}
+                height={325}
+                width={325}
                 isStopped={isStopped}
                 isPaused={isPaused}
             />

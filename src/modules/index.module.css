@@ -23,7 +23,11 @@
     .header {
         display: block;
     }
-    
+
+    .intro h1 {
+        text-align: center;
+    }
+
     .card-list {
         display: block;
     }
